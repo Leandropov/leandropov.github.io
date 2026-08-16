@@ -617,6 +617,12 @@ h1, h2 {
    como un filo suelto en el borde de abajo. */
 .case-figure img {
   width: 100%;
+  /* `height: auto` es obligatorio aquí. Los <img> llevan width y height como
+     atributos para reservar el hueco antes de cargar, y el navegador los aplica
+     como estilo de baja prioridad: al fijar el ancho por CSS y no el alto, el
+     alto del atributo (en píxeles del archivo) se imponía y estiraba la imagen.
+     Con `auto`, el alto vuelve a salir de la proporción real. */
+  height: auto;
   border-radius: var(--radius-card);
 }
 
@@ -861,6 +867,9 @@ h1, h2 {
 .portrait img {
   width: 100%;
   max-width: 420px;
+  /* Igual que en .case-figure: sin `height: auto`, el alto del atributo pisa al
+     aspect-ratio y la caja sale con la altura del archivo. */
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-card);
