@@ -7,16 +7,28 @@
 <link rel="stylesheet" href="style.css">
 <meta name="description" content="Rediseño de la app operativa de los choferes de Abastible: de tablet más POS a un solo dispositivo, sin tocar los pasos que exige la normativa.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://leandropov.github.io/abastible.html">
+<meta name="theme-color" content="#ffffff">
+<!-- Las dos fuentes del primer pantallazo, pedidas ya: si no, el
+     navegador no las descubre hasta haber leído style.css entero.
+     `crossorigin` es obligatorio aunque sean del propio sitio: las
+     fuentes siempre se piden en modo CORS y sin él se bajan dos veces. -->
+<link rel="preload" href="fonts/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Open Graph: la tarjeta que se ve al pegar el enlace en LinkedIn, WhatsApp
      o un correo. Las URLs son absolutas por obligación del formato; si algún
-     día pones dominio propio, hay que cambiar el dominio en las 6 páginas. -->
+     día pones dominio propio, hay que cambiar el dominio aquí y en el
+     <link rel="canonical">, en las 6 páginas y en sitemap.xml. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leandro Bravo">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="es">
 <meta property="og:title" content="Abastible VGTR | Leandro Bravo">
 <meta property="og:description" content="Rediseño de la app operativa de los choferes de Abastible: de tablet más POS a un solo dispositivo, sin tocar los pasos que exige la normativa.">
 <meta property="og:url" content="https://leandropov.github.io/abastible.html">
-<meta property="og:image" content="https://leandropov.github.io/img/abastible-portada.jpg">
+<meta property="og:image" content="https://leandropov.github.io/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Leandro Bravo, product designer">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="theme-light">
@@ -63,7 +75,7 @@
   <div class="container bg-solid">
 
     <figure class="case-figure">
-      <img src="img/abastible-portada.jpg" alt="La agenda del chofer en el dispositivo POS" width="2000" height="1468">
+      <img src="img/abastible-portada.webp" alt="La agenda del chofer en el dispositivo POS" width="2000" height="1468">
     </figure>
 
     <!-- ===== RESUMEN + FICHAS =====
@@ -101,7 +113,7 @@
     <div class="rule rule--inset" aria-hidden="true"></div>
 
     <figure class="case-figure">
-      <img src="img/abastible-sincronizacion.jpg" alt="Sincronización, antes y después: de una lista plana a un checklist con estado por recurso" width="2036" height="1132" loading="lazy" decoding="async">
+      <img src="img/abastible-sincronizacion.webp" alt="Sincronización, antes y después: de una lista plana a un checklist con estado por recurso" width="2036" height="1132" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== QUÉ HICE ===== -->
@@ -115,7 +127,7 @@
     </div>
 
     <figure class="case-figure">
-      <img src="img/abastible-checklists.jpg" alt="Checklists, antes y después: controles táctiles accesibles y respuesta explícita ante una falla" width="2336" height="1303" loading="lazy" decoding="async">
+      <img src="img/abastible-checklists.webp" alt="Checklists, antes y después: controles táctiles accesibles y respuesta explícita ante una falla" width="2336" height="1303" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== EL RESULTADO =====
@@ -132,7 +144,7 @@
     </div>
 
     <figure class="case-figure">
-      <img src="img/abastible-cierre.jpg" alt="El sistema completo funcionando en el dispositivo POS" width="2336" height="1075" loading="lazy" decoding="async">
+      <img src="img/abastible-cierre.webp" alt="El sistema completo funcionando en el dispositivo POS" width="2336" height="1075" loading="lazy" decoding="async">
     </figure>
 
   </div>

@@ -1,0 +1,8 @@
+# Todo el sitio es público: no hay nada que esconder de los buscadores.
+User-agent: *
+Allow: /
+
+# Los originales sin convertir de los logos no aportan nada en una búsqueda.
+Disallow: /img/logos-originales/
+
+Sitemap: https://leandropov.github.io/sitemap.xml

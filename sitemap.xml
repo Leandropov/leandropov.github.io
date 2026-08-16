@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lista de las páginas del sitio para los buscadores.
+     Si añades una página de caso nueva, añade aquí su <url> y actualiza la
+     fecha de <lastmod>. Si algún día pones dominio propio, hay que cambiar el
+     dominio en las seis direcciones. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://leandropov.github.io/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://leandropov.github.io/about.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leandropov.github.io/enovus.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandropov.github.io/abastible.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandropov.github.io/eclass.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandropov.github.io/payscan.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+</urlset>

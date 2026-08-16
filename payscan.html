@@ -7,16 +7,28 @@
 <link rel="stylesheet" href="style.css">
 <meta name="description" content="Sistema de pago de punta a punta para Payscan: el POS que usa quien paga y el backoffice con el que los comercios administran su red.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://leandropov.github.io/payscan.html">
+<meta name="theme-color" content="#ffffff">
+<!-- Las dos fuentes del primer pantallazo, pedidas ya: si no, el
+     navegador no las descubre hasta haber leído style.css entero.
+     `crossorigin` es obligatorio aunque sean del propio sitio: las
+     fuentes siempre se piden en modo CORS y sin él se bajan dos veces. -->
+<link rel="preload" href="fonts/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Open Graph: la tarjeta que se ve al pegar el enlace en LinkedIn, WhatsApp
      o un correo. Las URLs son absolutas por obligación del formato; si algún
-     día pones dominio propio, hay que cambiar el dominio en las 6 páginas. -->
+     día pones dominio propio, hay que cambiar el dominio aquí y en el
+     <link rel="canonical">, en las 6 páginas y en sitemap.xml. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leandro Bravo">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="es">
 <meta property="og:title" content="Payscan | Leandro Bravo">
 <meta property="og:description" content="Sistema de pago de punta a punta para Payscan: el POS que usa quien paga y el backoffice con el que los comercios administran su red.">
 <meta property="og:url" content="https://leandropov.github.io/payscan.html">
-<meta property="og:image" content="https://leandropov.github.io/img/payscan-pos.png">
+<meta property="og:image" content="https://leandropov.github.io/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Leandro Bravo, product designer">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="theme-light">
@@ -64,7 +76,7 @@
   <div class="container bg-solid">
 
     <figure class="case-figure">
-      <img src="img/payscan-pos.png" alt="El POS de Payscan instalado en máquinas expendedoras" width="2048" height="1331">
+      <img src="img/payscan-pos.webp" alt="El POS de Payscan instalado en máquinas expendedoras" width="2048" height="1331">
     </figure>
 
     <!-- ===== RESUMEN + FICHAS =====
@@ -99,7 +111,7 @@
     <div class="rule rule--inset" aria-hidden="true"></div>
 
     <figure class="case-figure">
-      <img src="img/payscan-login.png" alt="La entrada al backoffice de Payscan" width="1375" height="1002" loading="lazy" decoding="async">
+      <img src="img/payscan-login.webp" alt="La entrada al backoffice de Payscan" width="1375" height="1002" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== QUÉ HICE ===== -->
@@ -114,11 +126,11 @@
     </div>
 
     <figure class="case-figure">
-      <img src="img/payscan-panel.png" alt="Panel con ventas, tickets y estado de los dispositivos en tiempo real" width="1080" height="1443" loading="lazy" decoding="async">
+      <img src="img/payscan-panel.webp" alt="Panel con ventas, tickets y estado de los dispositivos en tiempo real" width="1080" height="1443" loading="lazy" decoding="async">
     </figure>
 
     <figure class="case-figure">
-      <img src="img/payscan-sucursales.png" alt="Listado de sucursales de un comercio, con sus dispositivos conectados" width="1200" height="757" loading="lazy" decoding="async">
+      <img src="img/payscan-sucursales.webp" alt="Listado de sucursales de un comercio, con sus dispositivos conectados" width="1200" height="757" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== EL RESULTADO =====
@@ -134,7 +146,7 @@
     </div>
 
     <figure class="case-figure">
-      <img src="img/payscan-backoffice.png" alt="El backoffice completo: gestión, monitoreo y perfiles" width="1200" height="900" loading="lazy" decoding="async">
+      <img src="img/payscan-backoffice.webp" alt="El backoffice completo: gestión, monitoreo y perfiles" width="1200" height="900" loading="lazy" decoding="async">
     </figure>
 
   </div>

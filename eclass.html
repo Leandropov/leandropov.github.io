@@ -7,16 +7,28 @@
 <link rel="stylesheet" href="style.css">
 <meta name="description" content="Rediseño de Campus Virtual de eClass con un modelo de catálogo tipo streaming: jerarquía de categorías, recorridos entre cursos y búsqueda propia.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://leandropov.github.io/eclass.html">
+<meta name="theme-color" content="#ffffff">
+<!-- Las dos fuentes del primer pantallazo, pedidas ya: si no, el
+     navegador no las descubre hasta haber leído style.css entero.
+     `crossorigin` es obligatorio aunque sean del propio sitio: las
+     fuentes siempre se piden en modo CORS y sin él se bajan dos veces. -->
+<link rel="preload" href="fonts/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Open Graph: la tarjeta que se ve al pegar el enlace en LinkedIn, WhatsApp
      o un correo. Las URLs son absolutas por obligación del formato; si algún
-     día pones dominio propio, hay que cambiar el dominio en las 6 páginas. -->
+     día pones dominio propio, hay que cambiar el dominio aquí y en el
+     <link rel="canonical">, en las 6 páginas y en sitemap.xml. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leandro Bravo">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="es">
 <meta property="og:title" content="eClass On Demand | Leandro Bravo">
 <meta property="og:description" content="Rediseño de Campus Virtual de eClass con un modelo de catálogo tipo streaming: jerarquía de categorías, recorridos entre cursos y búsqueda propia.">
 <meta property="og:url" content="https://leandropov.github.io/eclass.html">
-<meta property="og:image" content="https://leandropov.github.io/img/eclass-portada.jpg">
+<meta property="og:image" content="https://leandropov.github.io/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Leandro Bravo, product designer">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="theme-light">
@@ -65,7 +77,7 @@
   <div class="container bg-solid">
 
     <figure class="case-figure">
-      <img src="img/eclass-portada.jpg" alt="Campus Virtual rediseñado" width="2336" height="1726">
+      <img src="img/eclass-portada.webp" alt="Campus Virtual rediseñado" width="2336" height="1726">
     </figure>
 
     <!-- ===== RESUMEN + FICHAS =====
@@ -100,7 +112,7 @@
     <div class="rule rule--inset" aria-hidden="true"></div>
 
     <figure class="case-figure">
-      <img src="img/eclass-home.jpg" alt="El home rediseñado, ordenado como una vitrina de contenido" width="2336" height="1752" loading="lazy" decoding="async">
+      <img src="img/eclass-home.webp" alt="El home rediseñado, ordenado como una vitrina de contenido" width="2336" height="1752" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== QUÉ HICE ===== -->
@@ -115,7 +127,7 @@
     </div>
 
     <figure class="case-figure">
-      <img src="img/eclass-busqueda.jpg" alt="Búsqueda con resultados filtrables y recomendación de contenido" width="2336" height="1752" loading="lazy" decoding="async">
+      <img src="img/eclass-busqueda.webp" alt="Búsqueda con resultados filtrables y recomendación de contenido" width="2336" height="1752" loading="lazy" decoding="async">
     </figure>
 
     <!-- ===== EL RESULTADO =====
@@ -133,7 +145,7 @@
     <!-- La página completa de una sola pieza. Es la imagen más alta del sitio
          (unas cinco pantallas): va al final a propósito, como cierre. -->
     <figure class="case-figure">
-      <img src="img/eclass-pagina-completa.jpg" alt="La página completa de Campus Virtual, de arriba abajo" width="2336" height="8164" loading="lazy" decoding="async">
+      <img src="img/eclass-pagina-completa.webp" alt="La página completa de Campus Virtual, de arriba abajo" width="2336" height="8164" loading="lazy" decoding="async">
     </figure>
 
   </div>

@@ -55,15 +55,25 @@ gusta cómo queda, se ajusta el ancho en `style.css` buscando `.hero h1`
 
 ## Cambiar una imagen
 
-1. Mete tu imagen en una carpeta `img/` dentro de este proyecto.
-2. Busca la URL vieja y reemplázala por la ruta nueva:
+Todas las imágenes del sitio están en **WebP**, que pesa un tercio que un PNG
+y se ve igual. Exporta como siempre desde Figma y convierte el archivo:
+
+```
+cwebp -q 85 mi-captura.png -o img/mi-caso.webp
+```
+
+Luego sustituye la ruta en el HTML. **Los atributos `width` y `height` son
+obligatorios** y llevan las medidas reales del archivo: son los que reservan el
+hueco para que el texto no baje de golpe cuando la imagen termina de cargar.
+Para saberlas: `sips -g pixelWidth -g pixelHeight img/mi-caso.webp`.
 
 ```html
-<!-- antes -->
-<img src="https://framerusercontent.com/images/QiP6ku....png" alt="Clerk">
-<!-- después -->
-<img src="img/mi-caso.png" alt="Nombre del proyecto">
+<img src="img/mi-caso.webp" alt="Nombre del proyecto"
+     width="2336" height="1314" loading="lazy" decoding="async">
 ```
+
+`loading="lazy"` va en todas menos en la primera imagen de cada página, que es
+la única que se ve nada más entrar y por eso carga de inmediato.
 
 El `alt` es la descripción para lectores de pantalla y buscadores: escribe qué
 es el proyecto, no dejes "imagen".
@@ -71,9 +81,11 @@ es el proyecto, no dejes "imagen".
 **Proporciones**, para que no se deformen:
 - Caso ancho: 1168 × 658 (aprox. 16:9)
 - Caso a media columna: 580 × 659 (casi cuadrado, un poco vertical)
-- Galería: 480 × 360
 - Iconos de servicio: 80 × 80
-- Logos de clientes: alto libre, se dibujan a 48px de alto
+- Retrato de Sobre mí: vertical 4:5
+
+**Exporta al doble**: el sitio se ve a 1168px de ancho, así que las capturas
+van a 2336px para que no se vean borrosas en pantallas Retina.
 
 ## Añadir o quitar un caso
 
@@ -125,7 +137,7 @@ llevan el logo de la empresa en un círculo de 40x40. **Los dos archivos tienen
 que ir iguales:** si cambias uno, cambia el otro.
 
 ```html
-<img class="avatar" src="img/enovus.png" alt="">
+<img class="avatar" src="img/enovus.webp" alt="">
 ```
 
 El `alt` va vacío a propósito: el nombre de la empresa está escrito al lado, así
@@ -133,10 +145,10 @@ que un lector de pantalla lo diría dos veces.
 
 | Empresa | Archivo |
 | --- | --- |
-| Enovus+ | `img/enovus.png` |
-| Abastible | `img/abastible.png` |
-| HF Solutions | `img/hf-solutions.png` |
-| eClass | `img/eclass.png` |
+| Enovus+ | `img/enovus.webp` |
+| Abastible | `img/abastible.webp` |
+| HF Solutions | `img/hf-solutions.webp` |
+| eClass | `img/eclass.webp` |
 
 En `img/logos-originales/` están los archivos tal como llegaron, sin tocar. Los
 de `img/` son la versión preparada para el círculo: Abastible venía con el
@@ -162,8 +174,14 @@ quitarlo, borra la línea del `border`.
 Están todos juntos al inicio de `style.css`, en los bloques
 `body.theme-light` y `body.theme-dark`. Cambiando ahí se actualiza todo el sitio.
 
-La tipografía se carga en la primera línea de `style.css` desde Google Fonts.
-Las variables `--serif`, `--sans` y `--garamond` definen dónde se usa cada una.
+Las tipografías están en la carpeta `fonts/` y se declaran al principio de
+`style.css`. Antes se cargaban desde Google Fonts; ahora las sirve tu propio
+sitio, que carga antes y evita que Google reciba la IP de cada visitante. Las
+variables `--serif`, `--sans` y `--garamond` definen dónde se usa cada una.
+
+Si cambias de tipografía, hay que tocar tres sitios: los bloques `@font-face`
+al principio de `style.css`, las variables de familia, y las dos líneas
+`<link rel="preload">` del `<head>` de cada página.
 
 ### Los dos tipos de botón
 
@@ -185,6 +203,27 @@ Para hacerla más o menos visible, cambia `--grid-opacity`
 (hoy: 6% en la página clara, 12% en la oscura).
 
 El hero no lleva resplandor: es fondo plano más la retícula.
+
+## Archivos que no se ven pero importan
+
+| Archivo | Para qué sirve | Cuándo tocarlo |
+| --- | --- | --- |
+| `sitemap.xml` | La lista de páginas para Google | Al añadir o quitar una página |
+| `robots.txt` | Permite el rastreo y apunta al sitemap | Casi nunca |
+| `404.html` | Lo que ve quien llega a una dirección que no existe | Casi nunca |
+| `img/og-card.png` | La tarjeta que sale al pegar el enlace en LinkedIn o WhatsApp | Si cambias de titular o de oficio |
+| `fonts/` | Las tipografías, servidas desde aquí y no desde Google | Solo si cambias de tipografía |
+
+La tarjeta de compartir mide **1200 × 630**, que es lo que recortan las redes.
+Va en PNG a propósito y no en WebP: el rastreador de LinkedIn no maneja WebP con
+fiabilidad, y ahí es donde más se va a compartir. Si la rehaces en Figma,
+exporta a esa medida exacta y conserva el nombre del archivo.
+
+### Si algún día pones dominio propio
+
+Hay que cambiar el dominio en tres sitios: el `<link rel="canonical">` y las
+etiquetas `og:` del `<head>` de las seis páginas, y las seis direcciones de
+`sitemap.xml`. Busca `leandropov.github.io` y reemplaza.
 
 ---
 

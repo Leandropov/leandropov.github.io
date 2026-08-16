@@ -7,17 +7,61 @@
 <link rel="stylesheet" href="style.css">
 <meta name="description" content="Diseño producto en equipos internos, no en agencia. Antes de dibujar una pantalla necesito entender el proceso completo, incluido el que nadie documentó.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://leandropov.github.io/about.html">
+<meta name="theme-color" content="#000000">
+<!-- Las dos fuentes del primer pantallazo, pedidas ya: si no, el
+     navegador no las descubre hasta haber leído style.css entero.
+     `crossorigin` es obligatorio aunque sean del propio sitio: las
+     fuentes siempre se piden en modo CORS y sin él se bajan dos veces. -->
+<link rel="preload" href="fonts/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Open Graph: la tarjeta que se ve al pegar el enlace en LinkedIn, WhatsApp
      o un correo. Las URLs son absolutas por obligación del formato; si algún
-     día pones dominio propio, hay que cambiar el dominio en las 6 páginas. -->
+     día pones dominio propio, hay que cambiar el dominio aquí y en el
+     <link rel="canonical">, en las 6 páginas y en sitemap.xml. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leandro Bravo">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="es">
 <meta property="og:title" content="Sobre Leandro Bravo | Product designer">
 <meta property="og:description" content="Diseño producto en equipos internos, no en agencia. Antes de dibujar una pantalla necesito entender el proceso completo, incluido el que nadie documentó.">
 <meta property="og:url" content="https://leandropov.github.io/about.html">
-<meta property="og:image" content="https://leandropov.github.io/img/leandro.jpg">
+<meta property="og:image" content="https://leandropov.github.io/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Leandro Bravo, product designer">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Datos estructurados: le dice a Google y a los buscadores con IA quién
+     eres, en un formato que entienden sin adivinar. No lleva el correo a
+     propósito: ya está visible en el pie para quien lo necesite, y aquí sólo
+     serviría para que lo recogieran los robots de spam más cómodamente. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://leandropov.github.io/#leandro",
+  "name": "Leandro Bravo",
+  "givenName": "Leandro",
+  "familyName": "Bravo",
+  "url": "https://leandropov.github.io/",
+  "image": "https://leandropov.github.io/img/leandro.webp",
+  "jobTitle": "Product designer",
+  "description": "Product designer. Diseño para operaciones complejas: menos pasos, menos errores, más gente usándolo. Casos en formación corporativa, energía y medios de pago.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Enovus+"
+  },
+  "knowsAbout": [
+    "Diseño de producto",
+    "Sistemas de diseño",
+    "Arquitectura de información",
+    "Diseño de interfaz",
+    "Accesibilidad"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/leandro-bravo/"
+  ]
+}
+</script>
 </head>
 <body class="theme-dark">
 <!-- ==========================================================================
@@ -79,7 +123,7 @@
          vienes, cómo llegaste al diseño, qué haces fuera del trabajo).
          Cuéntamelo suelto y lo reescribo.
 
-         LA FOTO: deja tu retrato en img/leandro.jpg. Se recorta en vertical
+         LA FOTO: deja tu retrato en img/leandro.webp. Se recorta en vertical
          4:5, así que elige una donde quepas bien de medio cuerpo. -->
     <div class="split">
       <div>
@@ -88,7 +132,7 @@
         <p>He trabajado en formación corporativa, en energía y en medios de pago. Sectores distintos con el mismo problema debajo: procesos largos, muchas reglas, y gente que usa el producto porque tiene que hacerlo, no porque le apetezca. Ahí una pantalla mal resuelta no es una molestia, es un coste.</p>
       </div>
       <div class="portrait">
-        <img src="img/leandro.jpg" alt="Leandro Bravo" width="900" height="1124">
+        <img src="img/leandro.webp" alt="Leandro Bravo" width="900" height="1124">
       </div>
     </div>
 
@@ -101,22 +145,22 @@
              una empresa, una fecha o un logo, cámbialo en los dos sitios. -->
         <div class="timeline">
           <div class="timeline-row">
-            <img class="avatar" src="img/enovus.png" alt="" width="400" height="400" loading="lazy" decoding="async">
+            <img class="avatar" src="img/enovus.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
             <div><div class="role">Diseñador UX/UI</div><div class="company">Enovus+</div></div>
             <div class="date">Abr 2026 - Presente</div>
           </div>
           <div class="timeline-row">
-            <img class="avatar" src="img/abastible.png" alt="" width="400" height="400" loading="lazy" decoding="async">
+            <img class="avatar" src="img/abastible.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
             <div><div class="role">Diseñador UX/UI</div><div class="company">Abastible</div></div>
             <div class="date">Ago 2025 - Mar 2026</div>
           </div>
           <div class="timeline-row">
-            <img class="avatar" src="img/hf-solutions.png" alt="" width="400" height="400" loading="lazy" decoding="async">
+            <img class="avatar" src="img/hf-solutions.webp" alt="" width="400" height="400" loading="lazy" decoding="async">
             <div><div class="role">Diseñador UX/UI</div><div class="company">HF Solutions</div></div>
             <div class="date">Jun 2024 - Ene 2025</div>
           </div>
           <div class="timeline-row">
-            <img class="avatar" src="img/eclass.png" alt="" width="200" height="200" loading="lazy" decoding="async">
+            <img class="avatar" src="img/eclass.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
             <div><div class="role">Diseñador UI</div><div class="company">eClass</div></div>
             <div class="date">Jul 2022 - Jun 2024</div>
           </div>
