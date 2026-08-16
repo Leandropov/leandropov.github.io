@@ -63,7 +63,10 @@ body.theme-light {
      El fondo y el texto salen de --fg y --bg, así que se dan vuelta solos en la
      página oscura; aquí sólo hace falta decir a dónde va el hover. */
   --btn-solid-hover: #2b2b2b;
-  --tag-bg: rgba(0,0,0,.3);
+  /* .42 y no .3: las etiquetas van en blanco sobre capturas claras y con el
+     velo anterior el contraste quedaba en 3,9:1 sobre la de Abastible y 4,2:1
+     sobre la de Payscan, por debajo del 4,5:1 que pide WCAG AA. */
+  --tag-bg: rgba(0,0,0,.42);
   --tag-fg: #ffffff;
   --icon-bg: rgba(0,0,0,.05);
   --icon-hover: rgba(0,0,0,.1);
@@ -110,6 +113,23 @@ body.theme-dark {
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* Foco de teclado --------------------------------------------------------- */
+
+/* Quien navega con el tabulador necesita ver dónde está. El anillo sale del
+   color del texto, así que se pinta negro en las páginas claras y blanco en la
+   oscura sin escribir dos reglas; el `offset` lo saca fuera del elemento, que
+   es lo que lo hace visible también sobre los botones sólidos.
+   `:focus-visible` y no `:focus`: el anillo aparece con el teclado, no al
+   hacer clic con el ratón. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+/* Las tarjetas de caso son grandes y llevan esquinas redondeadas: un poco más
+   de aire para que el anillo no parezca pegado a la imagen. */
+.work-card:focus-visible { outline-offset: 5px; }
 
 /* Rejilla de fondo: mismo mosaico que el original — SVG de 127px con trazos
    de 2px, dibujado a 25.5px. Al reducirse, los trazos quedan en ~0.4px y el
@@ -379,6 +399,9 @@ h1, h2 {
   align-items: center;
   gap: 8px;
   height: 40px;
+  /* El hero es una columna flexible: sin esto, en móvil el navegador se queda
+     sin alto y encoge el botón de 40px a 24. `none` le prohíbe encogerse. */
+  flex: none;
   margin-top: 32px;
   padding: 0 6px 0 16px;
   /* Sólido y al revés que la página: negro en la portada, blanco en Story.
