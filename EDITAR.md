@@ -29,9 +29,9 @@ las imágenes están enlazadas a un servidor ajeno y pueden desaparecer sin avis
 - [ ] Los titulares y textos de las dos páginas
 - [ ] Las 7 imágenes de casos + sus etiquetas
 - [ ] Los 4 iconos de servicios
-- [ ] Los 7 logos de clientes
 - [ ] Las 4 imágenes de la galería
-- [ ] En Story: las 3 polaroids, los 6 avatares del historial, las 3 del collage
+- [ ] En Story: las 3 polaroids y las 3 del collage
+- [x] Los 4 logos del historial (ver *Logos del historial*, más abajo)
 - [ ] El correo del footer — está en dos sitios: el texto visible y el
       `data-email` del botón (que es lo que se copia al pulsarlo)
 - [ ] Los enlaces de redes (hoy están en `#`, sin destino)
@@ -118,6 +118,45 @@ súbelo para salvar la de abajo.
 En móvil no hace falta tocar nada: ahí la tarjeta cambia de proporción y la
 imagen se ve completa.
 
+## Logos del historial
+
+Los cuatro puestos de "Dónde he trabajado" (portada) y del historial de Story
+llevan el logo de la empresa en un círculo de 40x40. **Los dos archivos tienen
+que ir iguales:** si cambias uno, cambia el otro.
+
+```html
+<img class="avatar" src="img/enovus.png" alt="">
+```
+
+El `alt` va vacío a propósito: el nombre de la empresa está escrito al lado, así
+que un lector de pantalla lo diría dos veces.
+
+| Empresa | Archivo |
+| --- | --- |
+| Enovus+ | `img/enovus.png` |
+| Abastible | `img/abastible.png` |
+| HF Solutions | `img/hf-solutions.png` |
+| eClass | `img/eclass.png` |
+
+En `img/logos-originales/` están los archivos tal como llegaron, sin tocar. Los
+de `img/` son la versión preparada para el círculo: Abastible venía con el
+logo completo (símbolo naranja + la palabra "abastible") y a 40px la palabra no
+se leía, así que quedó sólo el símbolo; a HF Solutions y Enovus+ se les igualó
+el margen para que las cuatro marcas pesen lo mismo. Si algún día usas estos
+logos en grande, tira de `logos-originales/`: ahí Abastible conserva la palabra.
+
+**Si sustituyes un logo**, lo que mejor funciona en un círculo de 40px:
+
+- Imagen cuadrada, de 200px de lado o más.
+- El símbolo solo (sin el nombre de la empresa), centrado y ocupando unos dos
+  tercios del cuadrado. Si llega hasta el borde, el círculo le corta las puntas.
+- Fondo blanco o de color, pleno. Con transparencia también funciona, pero en la
+  página oscura la marca queda flotando sin ficha y desentona con las otras.
+
+El filete gris del borde es lo que hace que los logos sobre blanco se lean como
+fichas en la página clara. Está en `style.css`, en `.timeline-row img`: para
+quitarlo, borra la línea del `border`.
+
 ## Cambiar colores y tipografía
 
 Están todos juntos al inicio de `style.css`, en los bloques
@@ -125,6 +164,18 @@ Están todos juntos al inicio de `style.css`, en los bloques
 
 La tipografía se carga en la primera línea de `style.css` desde Google Fonts.
 Las variables `--serif`, `--sans` y `--garamond` definen dónde se usa cada una.
+
+### Los dos tipos de botón
+
+- **Sólido**, al revés que la página: negro en las páginas claras, blanco en
+  Story. Son "Trabajemos juntos" (`.btn-pill`) y "Descargar mi CV" (`.cv-btn`).
+  El color sale de `--fg` y `--bg`, así que se dan vuelta solos según la página;
+  el color al pasar el ratón es `--btn-solid-hover`.
+- **Gris neutro**, para lo secundario: el "Todos los proyectos" de las páginas
+  de caso (`.cv-btn.back-link`). Usa `--btn-bg` y `--btn-bg-hover`.
+
+Si quieres que un botón sólido vuelva a ser gris, cámbiale `background` a
+`var(--btn-bg)` y `color` a `var(--fg)`.
 
 ## Fondo
 

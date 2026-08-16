@@ -59,6 +59,10 @@ body.theme-light {
   --nav-idle: rgba(0,0,0,.55);
   --btn-bg: #f0f0f0;
   --btn-bg-hover: #e6e6e6;
+  /* Botón sólido: el color va al revés que la página (negro sobre claro).
+     El fondo y el texto salen de --fg y --bg, así que se dan vuelta solos en la
+     página oscura; aquí sólo hace falta decir a dónde va el hover. */
+  --btn-solid-hover: #2b2b2b;
   --tag-bg: rgba(0,0,0,.3);
   --tag-fg: #ffffff;
   --icon-bg: rgba(0,0,0,.05);
@@ -96,6 +100,8 @@ body.theme-dark {
      así que el tono no cambia; sólo deja de verse lo de detrás. */
   --btn-bg: #1a1a1a;
   --btn-bg-hover: #292929;
+  /* Aquí el botón sólido queda blanco sobre negro, y el hover se va a gris. */
+  --btn-solid-hover: #d9d9d9;
   --tag-bg: rgba(255,255,255,.18);
   --tag-fg: #ffffff;
   --icon-bg: rgba(255,255,255,.08);
@@ -375,8 +381,10 @@ h1, h2 {
   height: 40px;
   margin-top: 32px;
   padding: 0 6px 0 16px;
-  background: var(--btn-bg);
-  color: var(--fg);
+  /* Sólido y al revés que la página: negro en la portada, blanco en Story.
+     Es el CTA principal del sitio y con el gris claro de antes se perdía. */
+  background: var(--fg);
+  color: var(--bg);
   border: none;
   border-radius: var(--radius-pill);
   font-family: var(--sans);
@@ -386,12 +394,14 @@ h1, h2 {
   cursor: pointer;
   transition: background .2s var(--ease);
 }
-.btn-pill:hover { background: var(--btn-bg-hover); }
+.btn-pill:hover { background: var(--btn-solid-hover); }
+/* El círculo también se da vuelta: sobre el botón negro va blanco con la
+   flecha oscura, que es lo que lo mantiene visible. */
 .btn-pill .arrow {
   display: flex; align-items: center; justify-content: center;
   width: 24px; height: 24px;
   border-radius: 50%;
-  background: var(--fg); color: var(--bg);
+  background: var(--bg); color: var(--fg);
   flex: none;
 }
 .btn-pill .arrow svg { width: 10px; height: 10px; }
@@ -403,9 +413,17 @@ h1, h2 {
 .hero--case { height: auto; min-height: 0; padding-top: calc(var(--header-h) + 96px); padding-bottom: 48px; }
 .hero--case .hero-inner { height: auto; padding: 0 var(--pad); justify-content: flex-start; }
 
-/* Mismo estilo que el botón de CV: es una acción secundaria, así que no lleva
-   el círculo oscuro del CTA principal para no competir con él. */
-.back-link { margin-top: 0; margin-bottom: 32px; }
+/* Volver es una acción secundaria: se queda en el gris neutro mientras el CTA
+   del hero y el de CV van en sólido. Si lo pusiéramos negro, lo más llamativo
+   de la página de caso sería el botón de salir. */
+/* Lleva las dos clases en el selector a propósito: `.cv-btn` se define más
+   abajo, así que con `.back-link` a secas ganaba el sólido por orden. */
+.cv-btn.back-link {
+  margin-top: 0; margin-bottom: 32px;
+  background: var(--btn-bg);
+  color: var(--fg);
+}
+.cv-btn.back-link:hover { background: var(--btn-bg-hover); }
 
 .case-title { max-width: none; margin-bottom: 32px; }
 
@@ -637,18 +655,6 @@ h1, h2 {
   color: var(--muted);
 }
 
-/* Empresas --------------------------------------------------------------- */
-
-.companies {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  height: 48px;
-  margin-top: 28px;
-}
-.companies .eyebrow { flex: none; width: 150px; margin-right: 11px; }
-.companies img { height: 48px; width: auto; }
-
 /* Galería horizontal ----------------------------------------------------- */
 
 /* Banda del slider: fondo opaco del ANCHO DEL CONTENEDOR (medido: x264 w1200),
@@ -837,7 +843,18 @@ h1, h2 {
    izquierda resta los 20px de padding interno de la primera fila para que su
    texto arranque a la misma altura que el rótulo de la derecha. */
 .split--history > :first-child { padding-top: 12px; }
-.timeline-row img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+/* Los logos van recortados en círculo. `cover` evita que uno que no venga
+   cuadrado salga estirado: se recorta por el lado que sobra.
+   El filete es lo que hace que los logos sobre fondo blanco (Enovus+, HF,
+   Abastible) se lean como fichas y no como marcas flotando: sin él, en la
+   página clara sólo se ve el círculo de eClass y la fila queda despareja.
+   Para quitarlo, borra la línea del `border`. */
+.timeline-row img {
+  width: 40px; height: 40px; flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
 .timeline-row .role { font-size: 16px; line-height: 22px; }
 .timeline-row .company { font-size: 14px; line-height: 20px; color: var(--muted); }
 .timeline-row .date { margin-left: auto; font-size: 14px; color: var(--muted); flex: none; }
@@ -845,12 +862,16 @@ h1, h2 {
 .cv-btn {
   display: inline-flex; align-items: center; gap: 8px;
   height: 40px; margin-top: 24px; padding: 0 20px;
-  background: var(--btn-bg);
+  /* Sólido, igual que el CTA del hero: descargar el CV es la otra acción que
+     quieres que se vea. El `.back-link` de las páginas de caso usa esta misma
+     clase pero se queda en gris; su excepción está más arriba. */
+  background: var(--fg);
+  color: var(--bg);
   border-radius: var(--radius-pill);
   font-size: 15px;
   transition: background .2s var(--ease);
 }
-.cv-btn:hover { background: var(--btn-bg-hover); }
+.cv-btn:hover { background: var(--btn-solid-hover); }
 .cv-btn svg { width: 16px; height: 16px; }
 
 /* Sección final: titular abajo a la izquierda, collage ocupando la derecha.
@@ -900,8 +921,6 @@ h1, h2 {
   .site-footer::before, .split::before { display: none; }
   .final { padding-top: 72px; }
   .final-inner { min-height: 0; }
-  .companies { height: auto; flex-wrap: wrap; gap: 16px; padding: 24px 0; }
-  .companies .eyebrow { width: 100%; }
   .collage { display: none; }
 }
 
