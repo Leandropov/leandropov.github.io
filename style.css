@@ -579,6 +579,16 @@ h1, h2 {
 }
 .case-aside .case-h { margin-top: 0; }
 .case-aside .chips + .case-h { margin-top: 40px; }
+/* Contexto: en qué posición estaba yo en cada proyecto. Va como frase y no
+   como chips porque no es una lista de etiquetas sueltas, es una relación.
+   Está en los cuatro casos a propósito: si sólo apareciera en el que fue por
+   consultora, se leería como una excepción que hay que justificar. */
+.case-aside .case-context {
+  margin: 0;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--muted);
+}
 
 .chips {
   list-style: none;
