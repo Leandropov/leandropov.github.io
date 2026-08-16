@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre Leandro Bravo | Product designer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Diseño producto en equipos internos, no en agencia. Antes de dibujar una pantalla necesito entender el proceso completo, incluido el que nadie documentó.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- Open Graph: la tarjeta que se ve al pegar el enlace en LinkedIn, WhatsApp
+     o un correo. Las URLs son absolutas por obligación del formato; si algún
+     día pones dominio propio, hay que cambiar el dominio en las 6 páginas. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leandro Bravo">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Sobre Leandro Bravo | Product designer">
+<meta property="og:description" content="Diseño producto en equipos internos, no en agencia. Antes de dibujar una pantalla necesito entender el proceso completo, incluido el que nadie documentó.">
+<meta property="og:url" content="https://leandropov.github.io/about.html">
+<meta property="og:image" content="https://leandropov.github.io/img/leandro.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="theme-dark">
+<!-- ==========================================================================
+     Guía de edición completa en EDITAR.md (misma carpeta).
+     Los textos son texto plano: búscalos y reemplázalos.
+     Las imágenes son la URL dentro de cada <img src="...">.
+     Esta es la página oscura; los colores salen de `body.theme-dark`
+     en style.css.
+     ========================================================================== -->
+
+<div class="guides" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container">
+    <!-- NOMBRE / LOGO -->
+    <a href="index.html" class="logo">Leandro<span class="logo-last"> Bravo</span></a>
+    <nav class="nav-toggle">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        Proyectos
+      </a>
+      <a href="about.html" class="active">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        Sobre mí
+      </a>
+    </nav>
+  </div>
+  <!-- El filete inferior del header, con sus marcadores, va aquí dentro para
+       que quede por encima de la caja blanca -->
+  <div class="rule rule--header" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <!-- TITULAR PRINCIPAL — calibrado para cortar en 3 líneas.
+           Si cambias el largo, ajusta `.hero h1 { max-width }` en style.css -->
+      <h1 class="story" data-reveal>Antes de dibujar una pantalla necesito entender el proceso completo, incluido el que nadie documentó.</h1>
+      <a class="btn-pill" href="mailto:bravoleandro11@gmail.com">
+        Trabajemos juntos
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- Bloque de biografía e historial: fondo negro propio, la rejilla no se ve
+       aquí dentro. El hero, el cierre y el footer sí la dejan ver. -->
+  <div class="container bg-solid">
+
+    <!-- ===== BIOGRAFÍA + RETRATO =====
+         Columna izquierda: el rótulo en cursiva (.eyebrow) y los párrafos.
+         Columna derecha: una sola foto (ver `.portrait` en style.css).
+
+         OJO: estos dos párrafos son un esqueleto. Sólo dicen lo que se puede
+         sostener con tu trayectoria; falta tu historia personal (de dónde
+         vienes, cómo llegaste al diseño, qué haces fuera del trabajo).
+         Cuéntamelo suelto y lo reescribo.
+
+         LA FOTO: deja tu retrato en img/leandro.jpg. Se recorta en vertical
+         4:5, así que elige una donde quepas bien de medio cuerpo. -->
+    <div class="split">
+      <div>
+        <p class="eyebrow">Cómo llegué hasta aquí</p>
+        <p>Diseño producto en equipos internos, no en agencia. Convivo con operaciones, con soporte y con desarrollo desde el primer día, y eso cambia lo que llega a la mesa: veo el problema antes de que alguien lo formule como un encargo de diseño.</p>
+        <p>He trabajado en formación corporativa, en energía y en medios de pago. Sectores distintos con el mismo problema debajo: procesos largos, muchas reglas, y gente que usa el producto porque tiene que hacerlo, no porque le apetezca. Ahí una pantalla mal resuelta no es una molestia, es un coste.</p>
+      </div>
+      <div class="portrait">
+        <img src="img/leandro.jpg" alt="Leandro Bravo">
+      </div>
+    </div>
+
+    <div class="split split--tight">
+      <div>
+        <!-- ===== HISTORIAL LABORAL =====
+             Cada .timeline-row es un puesto: avatar (40x40), cargo,
+             empresa y fechas. Para quitar uno, borra su bloque entero. -->
+        <div class="timeline">
+          <div class="timeline-row">
+            <svg class="avatar" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/></svg>
+            <div><div class="role">Diseñador UX/UI</div><div class="company">Enovus+</div></div>
+            <div class="date">Abr 2026 - Presente</div>
+          </div>
+          <div class="timeline-row">
+            <svg class="avatar" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/></svg>
+            <div><div class="role">Diseñador UX/UI</div><div class="company">Abastible</div></div>
+            <div class="date">Ago 2025 - Mar 2026</div>
+          </div>
+          <div class="timeline-row">
+            <svg class="avatar" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/></svg>
+            <div><div class="role">Diseñador UX/UI</div><div class="company">HF Solutions</div></div>
+            <div class="date">Jun 2024 - Ene 2025</div>
+          </div>
+          <div class="timeline-row">
+            <svg class="avatar" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/></svg>
+            <div><div class="role">Diseñador UI</div><div class="company">eClass</div></div>
+            <div class="date">Jul 2022 - Jun 2024</div>
+          </div>
+        </div>
+      </div>
+      <!-- ===== POSICIONAMIENTO + CV =====
+           Este texto es a propósito distinto del "En contexto" de la portada:
+           allí va la versión corta, aquí la larga. Si cambias uno, revisa que
+           no acaben diciendo lo mismo. -->
+      <div>
+        <p class="eyebrow">Dónde me sitúo</p>
+        <p>Trabajo mejor cuando el problema viene enredado y con restricciones que no se negocian: normativa, sistemas heredados, equipos que ya tienen su forma de hacer las cosas. Ordenar lo que nadie ha ordenado todavía es la parte que me interesa.</p>
+        <p>No llego a rehacer lo que hay porque sí. Primero entiendo por qué está como está, que casi siempre tiene una razón, y desde ahí decido qué se toca. Estoy abierto tanto a entrar en un equipo como a colaborar por proyecto.</p>
+        <!-- El archivo en el servidor se llama cv-leandro-bravo.pdf (sin
+             espacios ni acentos, que en una URL dan problemas), pero `download`
+             le pone el nombre bonito al guardarlo: eso es lo que ve quien se lo
+             descarga. Si cambias uno, cambia el otro en las dos páginas. -->
+        <a class="cv-btn" href="cv-leandro-bravo.pdf" download="CV Leandro Bravo Product Designer.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+          Descargar mi CV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cierre del bloque de contexto (biografía + historial) -->
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- ===== CIERRE =====
+       En el referente esta banda lleva un collage de tres recortes a la
+       derecha. Como vamos con una sola foto, aquí queda sólo el titular y la
+       banda es más baja (.final-inner--solo).
+       Si algún día quieres una segunda imagen en el sitio, este es el hueco:
+       quita la clase --solo y mete la foto en la columna derecha. -->
+  <section class="final container">
+    <div class="final-inner final-inner--solo">
+      <h1 class="section-title section-title--xs" data-reveal>Listo para lo que viene</h1>
+    </div>
+  </section>
+
+  <!-- Arranque del footer -->
+  <div class="rule" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- ===== FOOTER =====
+         El correo va en dos sitios: el texto visible y el data-email
+         (lo que se copia al pulsar). Cambia los dos.
+         Los enlaces de redes están en href="#": ponles tus URLs. -->
+    <footer class="site-footer bg-solid-block">
+      <div class="footer-col">
+        <p class="eyebrow">Abierto a nuevas oportunidades</p>
+        <button class="email-pill" id="copyEmailBtn" data-email="bravoleandro11@gmail.com">
+          <span class="email-label">bravoleandro11@gmail.com</span>
+          <span class="copy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg></span>
+        </button>
+      </div>
+      <div class="footer-col">
+        <p class="eyebrow">Encuéntrame en</p>
+        <div class="social-row">
+          <a class="icon-circle" href="https://www.linkedin.com/in/leandro-bravo/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.9 8.65 22 11 22 14.4V21h-4v-5.7c0-1.36-.02-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.8H9z"/></svg></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Filete interno del footer (a sangre, con marcadores) -->
+  <div class="rule" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="footer-tail bg-solid-block"></div>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,916 @@
+/* ==========================================================================
+   Daniel Sun — clon
+   Medidas tomadas del sitio original a viewport 1920 (computed styles reales):
+     contenedor 1200px con 16px de padding  -> contenido 1168px
+     rejilla de fondo 25.5px, guías verticales en el borde del contenedor
+     hero 700px de alto, contenido anclado abajo (h1 en y=390, botón hasta 684)
+     grilla de casos: gap 8px | columnas de texto: gap 32px
+   "LT Superior Serif" es de pago (Lineto): se sustituye por Source Serif 4.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&display=swap');
+
+:root {
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --garamond: "EB Garamond", Georgia, serif;
+
+  --outer: 1200px;   /* caja del contenedor, donde caen las guías */
+  --pad: 16px;       /* padding interno -> contenido 1168px */
+  --half: 600px;     /* --outer / 2, para posicionar guías */
+
+  --card-gap: 8px;
+  --col-gap: 32px;
+
+  --radius-card: 16px;
+  --radius-pill: 32px;
+  --header-h: 52px;
+  --hero-h: 700px;
+
+  --ease: cubic-bezier(.16,.8,.24,1);
+}
+
+body.theme-light {
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: rgba(0,0,0,.6);
+  --line: rgba(0,0,0,.15);
+  --grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='127' height='127' fill='none'%3E%3Cpath stroke='%23000' stroke-width='2' d='M43 1v125M85 1v125M1 43h125M1 85h125M0 0h127v127H0z'/%3E%3C/svg%3E");
+  --grid-opacity: .06;
+  --track: rgba(0,0,0,.05);
+  --chip-bg: rgba(0,0,0,.06);
+  /* Conmutador: valores medidos del original. Las sombras en capas son lo que
+     le da cuerpo; con un color plano se ve como una etiqueta pegada. */
+  --toggle-track-shadow:
+    rgba(255,255,255,.85) 0 1.5px .5px -1px inset,
+    rgba(255,255,255,.5) 0 -1.5px .5px -1px inset,
+    rgba(0,0,0,.05) 0 -4px 5px 2px inset,
+    rgba(0,0,0,.08) 0 3px 2px 0 inset,
+    rgba(0,0,0,.15) 0 0 0 1px,
+    rgba(0,0,0,.06) 0 4px 2px 0;
+  --knob-bg: rgb(71,71,71);
+  --knob-shadow:
+    rgb(0,0,0) 0 0 0 1px,
+    rgba(0,0,0,.4) 0 2px 8px -1px,
+    rgba(0,0,0,.2) 0 3px 8px -1px,
+    rgba(255,255,255,.45) 0 -4px 4px 0 inset,
+    rgb(0,0,0) 0 -10px 6px 0 inset;
+  --knob-fg: #ffffff;
+  --nav-idle: rgba(0,0,0,.55);
+  --btn-bg: #f0f0f0;
+  --btn-bg-hover: #e6e6e6;
+  --tag-bg: rgba(0,0,0,.3);
+  --tag-fg: #ffffff;
+  --icon-bg: rgba(0,0,0,.05);
+  --icon-hover: rgba(0,0,0,.1);
+}
+
+body.theme-dark {
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: rgba(255,255,255,.65);
+  --line: rgba(255,255,255,.2);
+  --grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='127' height='127' fill='none'%3E%3Cpath stroke='%23fff' stroke-width='2' d='M43 1v125M85 1v125M1 43h125M1 85h125M0 0h127v127H0z'/%3E%3C/svg%3E");
+  --grid-opacity: .12;
+  --track: rgba(255,255,255,.1);
+  --chip-bg: rgba(255,255,255,.1);
+  --toggle-track-shadow:
+    rgba(255,255,255,.5) 0 1.5px .5px -1px inset,
+    rgba(255,255,255,.3) 0 -1.5px .5px -1px inset,
+    rgba(255,255,255,.08) 0 -4px 8px 2px inset,
+    rgba(255,255,255,.08) 0 3px 1px 0 inset,
+    rgba(0,0,0,.5) 0 0 0 1px,
+    rgba(255,255,255,.1) 0 4px 2px 0;
+  --knob-bg: rgb(255,255,255);
+  --knob-shadow:
+    rgb(255,255,255) 0 0 0 1px inset,
+    rgba(255,255,255,.2) 0 2px 10px -1px,
+    rgba(255,255,255,.3) 0 3px 10px -1px,
+    rgba(255,255,255,.7) 0 -4px 3px 0 inset,
+    rgba(0,0,0,.3) 0 -10px 6px 0 inset;
+  --knob-fg: #000000;
+  --nav-idle: rgba(255,255,255,.5);
+  /* Sólidos, no translúcidos: el botón del hero cae sobre la rejilla y con
+     alfa se le transparentaba el cuadriculado por debajo. Son exactamente el
+     color que daban antes al componerse sobre negro (10% y 16% de blanco),
+     así que el tono no cambia; sólo deja de verse lo de detrás. */
+  --btn-bg: #1a1a1a;
+  --btn-bg-hover: #292929;
+  --tag-bg: rgba(255,255,255,.18);
+  --tag-fg: #ffffff;
+  --icon-bg: rgba(255,255,255,.08);
+  --icon-hover: rgba(255,255,255,.16);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* Rejilla de fondo: mismo mosaico que el original — SVG de 127px con trazos
+   de 2px, dibujado a 25.5px. Al reducirse, los trazos quedan en ~0.4px y el
+   navegador los suaviza: de ahí el gris tan tenue. Reproducirlo con líneas
+   de 1px lo haría mucho más marcado. */
+body {
+  margin: 0;
+  position: relative;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 26px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Capa de la rejilla: es una capa aparte porque el original le aplica una
+   opacidad global (6% en claro, 12% en oscuro) sobre trazos negros puros.
+   Bajarle la opacidad al trazo en vez de a la capa no da el mismo gris en
+   los cruces, donde las líneas se superponen. */
+body::before {
+  content: "";
+  position: absolute;
+  /* Cubre toda la página. Donde no se ve es porque la sección de encima
+     tiene fondo propio (.bg-solid) o porque el header la tapa. */
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--grid-opacity);
+  background-image: var(--grid-tile);
+  background-size: 25.5px auto;
+  background-position: center top;
+  background-repeat: repeat;
+}
+
+main { position: relative; z-index: 1; }
+
+/* Secciones que tapan la rejilla dentro de la columna de contenido.
+   En el original sólo la llevan los bloques densos (casos y servicios en
+   Works; biografía + historial en Story). El hero, la galería y el footer la
+   dejan ver. En los márgenes de fuera del contenedor siempre se ve. */
+.bg-solid { background: var(--bg); padding-bottom: var(--pad); }
+
+/* Igual que .bg-solid pero para un bloque que vive dentro de un .container:
+   se estira hasta el borde del contenedor (donde caen las guías) sin mover
+   el contenido. Lo usan los bloques que no arrancan al inicio de su sección,
+   como la grilla de servicios (el titular de arriba sí deja ver la rejilla). */
+.bg-solid-block {
+  background: var(--bg);
+  margin-inline: calc(var(--pad) * -1);
+  padding-inline: var(--pad);
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* Ancho: hasta 1200px, pero dejando siempre 16px de calle a cada lado cuando
+   la ventana es más estrecha (así lo hace el original). Sin esto la caja se
+   pegaba a los bordes y las guías se salían de pantalla. */
+.container {
+  width: calc(100% - var(--pad) * 2);
+  max-width: var(--outer);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* Guías verticales fijas en los bordes del contenedor -------------------- */
+
+/* Un único par de líneas continuas de arriba abajo, por encima de todo
+   (incluido el header). Dibujarlas en dos capas distintas —bordes dentro del
+   header y overlay fuera— hacía que cada lado cayera en una posición
+   fraccionaria distinta y se vieran diferentes. */
+.guides {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+.guides::before,
+.guides::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+/* Atadas al borde real del contenedor: en ventanas de menos de 1232px se
+   quedan en la calle de 16px en vez de irse fuera de pantalla. */
+.guides::before { left: max(var(--pad), calc(50% - var(--half))); }
+.guides::after  { left: min(calc(100% - var(--pad)), calc(50% + var(--half))); }
+
+/* Línea horizontal a sangre + marcadores cuadrados en las intersecciones -- */
+
+.rule {
+  position: relative;
+  /* Por encima de los fondos de sección: si no, el bloque blanco que viene
+     después en el HTML tapa la mitad inferior de los marcadores. */
+  z-index: 2;
+  height: 1px;
+  /* No debe ocupar altura: en el original son bordes, no bloques. Sin esto
+     cada filete empuja 1px y el error se acumula por toda la página. */
+  margin-bottom: -1px;
+  background: var(--line);
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* Marcadores: 9x9 centrados en el cruce con las guías (medido del original) */
+.rule::before,
+.rule::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 9px; height: 9px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+/* Centrados sobre las guías, siguiéndolas también cuando se estrechan */
+.rule::before { left: max(calc(var(--pad) - 4px), calc(50% - var(--half) - 4px)); }
+.rule::after  { left: min(calc(100% - var(--pad) - 5px), calc(50% + var(--half) - 4px)); }
+
+/* Variante interna: sólo el ancho del contenedor y SIN marcadores.
+   La usan los filetes que separan bloques dentro de una misma sección. */
+.rule--inset {
+  width: auto;
+  left: auto;
+  transform: none;
+  margin-inline: calc(var(--pad) * -1);
+}
+.rule--inset::before,
+.rule--inset::after { display: none; }
+
+/* El filete del header va DENTRO del header, no en el hero: así se pinta en
+   la misma capa que la caja blanca y los marcadores de las esquinas quedan
+   enteros encima, no medio tapados. */
+.rule--header { position: absolute; bottom: 0; left: 50%; }
+
+/* Header ----------------------------------------------------------------- */
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  height: var(--header-h);
+  display: flex;
+  /* stretch, no center: la caja interna debe ocupar los 52px completos.
+     Con center sólo medía lo alto del contenido y el blanco quedaba corto. */
+  align-items: stretch;
+}
+/* El fondo opaco va sólo en la columna de contenido, no a ancho completo:
+   en los laterales del header la rejilla se sigue viendo.
+   Los bordes izq/der son los que continúan las guías dentro de la banda del
+   header (el header se pinta encima, así que sin ellos las guías se cortan). */
+.site-header .container { background: var(--bg); }
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo { font-size: 21px; line-height: 20px; letter-spacing: -.5px; font-weight: 500; }
+
+/* Medidas del original: pista de 28px sin padding, y cada enlace ocupa el alto
+   completo con padding asimétrico (menos por el lado del icono). */
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background: var(--track);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--toggle-track-shadow);
+}
+.nav-toggle a {
+  /* z-index 0 crea contexto de apilamiento: sin esto el botón activo se pinta
+     por detrás del fondo de la pista y sale apagado. */
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 7px 11px 7px 7px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 24px;
+  color: var(--nav-idle);
+  transition: color .25s var(--ease);
+}
+.nav-toggle a.active { color: var(--knob-fg); }
+.nav-toggle a.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--knob-bg);
+  border-radius: 24px;
+  box-shadow: var(--knob-shadow);
+  z-index: -1;
+}
+.nav-toggle svg { width: 16px; height: 16px; flex: none; }
+
+/* Hero ------------------------------------------------------------------- */
+
+/* Geometría del hero, igual que el original: alto 60vh con un mínimo de 700px,
+   y el contenido anclado abajo con 340px de reserva arriba. */
+.hero {
+  position: relative;
+  height: 60vh;
+  min-height: var(--hero-h);
+  display: flex;
+  place-content: center;
+  align-items: center;
+  padding: 0 var(--pad);
+  overflow: hidden;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--outer);
+  height: 100%;
+  padding: 340px var(--pad) var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 32px;
+}
+.hero-inner .btn-pill { margin-top: 0; }
+
+/* Tipografía ------------------------------------------------------------- */
+
+h1, h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -2px;
+  margin: 0;
+  padding-top: 6px;
+}
+/* Anchos calibrados para que el texto corte en las mismas palabras que el
+   original. El sitio real usa 950/800px con "LT Superior Serif"; la fuente
+   sustituta es más estrecha, así que estas medidas son su equivalente. */
+/* Anchos calibrados POR TEXTO: cada titular corta bien a una medida distinta.
+   Si cambias el texto, hay que volver a ajustarlos o el reparto de líneas se
+   descuadra (y puede quedar una palabra suelta en la última línea). */
+.hero h1 { max-width: 980px; }         /* Works */
+.hero h1.story { max-width: 940px; }   /* Story */
+.section-title { max-width: 840px; }
+.section-title--sm { max-width: 500px; }
+.section-title--xs { max-width: 320px; }
+
+.eyebrow {
+  font-family: var(--garamond);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Botón pastilla --------------------------------------------------------- */
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  margin-top: 32px;
+  padding: 0 6px 0 16px;
+  background: var(--btn-bg);
+  color: var(--fg);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: .1px;
+  cursor: pointer;
+  transition: background .2s var(--ease);
+}
+.btn-pill:hover { background: var(--btn-bg-hover); }
+.btn-pill .arrow {
+  display: flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--fg); color: var(--bg);
+  flex: none;
+}
+.btn-pill .arrow svg { width: 10px; height: 10px; }
+
+/* Página de caso --------------------------------------------------------- */
+
+/* Hero más bajo que el de portada: aquí el titular es corto y lo que importa
+   es llegar pronto a la primera imagen. */
+.hero--case { height: auto; min-height: 0; padding-top: calc(var(--header-h) + 96px); padding-bottom: 48px; }
+.hero--case .hero-inner { height: auto; padding: 0 var(--pad); justify-content: flex-start; }
+
+/* Mismo estilo que el botón de CV: es una acción secundaria, así que no lleva
+   el círculo oscuro del CTA principal para no competir con él. */
+.back-link { margin-top: 0; margin-bottom: 32px; }
+
+.case-title { max-width: none; margin-bottom: 32px; }
+
+/* Entradilla a la izquierda, rol a la derecha */
+.case-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  width: 100%;
+}
+.case-lead { margin: 0; max-width: 520px; font-size: 20px; line-height: 30px; color: var(--muted); }
+.case-meta p:not(.eyebrow) { margin: 0; font-size: 16px; line-height: 26px; }
+.case-meta .eyebrow { margin-bottom: 12px; }
+
+/* Resumen. Medido del original: el bloque ocupa los 1200 del contenedor y se
+   parte en 720 + 480 SIN canal — las columnas se tocan y el divisor vertical
+   es el borde derecho de la izquierda. Cada columna lleva 16px de padding,
+   que es lo que deja el texto en 688 y las fichas en 448. */
+.case-summary {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  margin-inline: calc(var(--pad) * -1);
+}
+.case-summary > * { padding: var(--pad); }
+.case-summary > :first-child { border-right: 1px solid var(--line); }
+.case-summary p { margin: 0 0 18px; font-size: 16px; line-height: 26px; }
+.case-summary p:last-child { margin-bottom: 0; }
+
+/* Titulares del bloque de resumen: serif de 30px, como en el referente.
+   Los rótulos de los bloques de texto (El resultado, Qué hice) son otra cosa:
+   van en la cursiva de 20px que usa el resto del sitio. */
+.case-h {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: -.5px;
+  margin: 0 0 20px;
+}
+.case-aside .case-h { margin-top: 0; }
+.case-aside .chips + .case-h { margin-top: 40px; }
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  padding: 4px 10px 5px;
+  border-radius: 64px;
+  background: var(--chip-bg);
+  font-size: 14px;
+  line-height: 15px;
+}
+
+/* Bloques de texto: rótulo a la izquierda, contenido a la derecha */
+.case-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  padding: 64px 0;
+}
+/* :not(.eyebrow) por lo mismo que en .split: si no, esta regla le impone el
+   tamaño del texto corrido a los rótulos y salen a 16px en vez de 20. */
+.case-block p:not(.eyebrow) { margin: 0 0 18px; max-width: 520px; font-size: 16px; line-height: 26px; }
+/* Las cifras del resultado, con algo más de peso que el texto que las rodea */
+.case-block strong { font-weight: 600; }
+.case-block p:last-child { margin-bottom: 0; }
+.case-block > .eyebrow { margin: 0; }
+
+/* Mismo respiro arriba y abajo que el que ya tienen a los lados (16px, que es
+   lo que separa la imagen de 1168 del borde del contenedor de 1200).
+   Va en padding y no en margen: el margen se colapsaría fuera del bloque
+   blanco y esa banda dejaría ver la rejilla. */
+.case-figure { margin: 0; padding: var(--pad) 0; }
+/* Sin sombra ni borde: en el referente las imágenes de caso son sólo la
+   imagen con el radio de 16px. La sombra interior es de las tarjetas de la
+   portada, donde el fondo oscuro la absorbe; sobre una captura clara se leía
+   como un filo suelto en el borde de abajo. */
+.case-figure img {
+  width: 100%;
+  border-radius: var(--radius-card);
+}
+
+/* Reveal ----------------------------------------------------------------- */
+
+/* El estado oculto sólo se aplica si el JS arrancó (html.js): así el texto
+   nunca queda invisible si el script falla o no llega a ejecutarse. */
+.js [data-reveal] {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(6px);
+  transition: opacity .8s var(--ease), filter .8s var(--ease), transform .8s var(--ease);
+}
+.js [data-reveal].is-visible { opacity: 1; filter: blur(0); transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; filter: none; transform: none; transition: none; }
+}
+
+/* Subtítulo del hero ----------------------------------------------------- */
+
+/* padding, no margin: con margin se colapsa fuera del bloque y su fondo
+   blanco arrancaría 16px más abajo de donde debe. */
+.hero-sub { padding: var(--pad) 0; }
+
+/* Grilla de casos -------------------------------------------------------- */
+
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--card-gap);
+  margin-top: 32px;
+}
+
+.work-card {
+  position: relative;
+  grid-column: span 2;
+  aspect-ratio: 1168 / 658;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.2);
+}
+.work-card.half { grid-column: span 1; aspect-ratio: 580 / 659; }
+
+.work-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 94px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,0));
+  z-index: 1;
+}
+
+.work-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+.work-card:hover img { transform: scale(1.02); }
+
+.work-tags {
+  position: absolute;
+  top: var(--pad); left: var(--pad);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+.tag {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 1px 11px;
+  border-radius: 24px;
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-bg);
+  color: var(--tag-fg);
+  backdrop-filter: blur(8px);
+}
+/* La etiqueta del cliente no es blanco plano: lleva un degradado vertical */
+.tag.primary {
+  background: linear-gradient(180deg, #fff 24.79%, #e6e6e6 73.26%);
+  border-color: #fff;
+  color: #000;
+}
+
+/* Secciones -------------------------------------------------------------- */
+
+.section { padding-top: 216px; }
+.section-head { margin-bottom: 32px; }
+
+/* Servicios -------------------------------------------------------------- */
+
+/* El filete superior de este bloque lo pone un .rule a sangre (va con
+   marcadores en los bordes del contenedor), no un borde del propio bloque. */
+
+.service-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+/* La última fila no lleva línea: justo debajo está el filete que cierra la
+   sección, y las dos juntas se leen como un borde doble. */
+.service-row:last-child { box-shadow: none; }
+
+.service-row::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: var(--line);
+}
+
+/* Respiro igual arriba y abajo. El original dejaba 32px sobre el icono y 0
+   bajo el párrafo, con el texto pegado a la línea; aquí se equilibra. */
+.service { padding: 32px 0; }
+/* Los iconos son SVG en línea: heredan el color del tema con currentColor,
+   así que funcionan igual en la página clara y en la oscura. */
+.service .ico {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 58px;
+  color: var(--fg);
+  opacity: .8;
+}
+
+.service h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: -.5px;
+  margin: 0 0 8px;
+}
+.service p {
+  margin: 0;
+  /* Al ancho completo de su columna, igual que la biografía y el historial de
+     Sobre mí. El aire con el divisor central lo da el canal de 32px entre
+     columnas, 16 a cada lado; no hace falta recortar la medida. */
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--muted);
+}
+
+/* Empresas --------------------------------------------------------------- */
+
+.companies {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 48px;
+  margin-top: 28px;
+}
+.companies .eyebrow { flex: none; width: 150px; margin-right: 11px; }
+.companies img { height: 48px; width: auto; }
+
+/* Galería horizontal ----------------------------------------------------- */
+
+/* Banda del slider: fondo opaco del ANCHO DEL CONTENEDOR (medido: x264 w1200),
+   no a sangre. En los márgenes la rejilla se sigue viendo. */
+.gallery-band {
+  background: var(--bg);
+  width: calc(100% - var(--pad) * 2);
+  max-width: var(--outer);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.gallery {
+  display: flex;
+  gap: var(--card-gap);
+  padding-top: var(--pad);
+  padding-bottom: var(--pad);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar { display: none; }
+.gallery img {
+  height: 360px;
+  width: auto;
+  flex: none;
+  border-radius: var(--radius-card);
+  scroll-snap-align: start;
+}
+
+/* Footer ----------------------------------------------------------------- */
+
+/* Medido del original: el contenido arranca 16px bajo el filete y el bloque
+   cierra a 16px, con un filete interno y una cola de 48px debajo. */
+.site-footer {
+  position: relative;
+  margin-top: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: var(--line);
+}
+.footer-tail { height: 48px; }
+.footer-col .eyebrow { margin-bottom: 24px; }
+
+.email-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 8px 0 16px;
+  background: var(--track);
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  cursor: pointer;
+}
+.email-pill .copy-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--icon-bg);
+}
+.email-pill .copy-icon svg { width: 12px; height: 12px; }
+
+.social-row { display: flex; gap: 10px; }
+.icon-circle {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--icon-bg);
+  color: var(--muted);
+  transition: background .2s var(--ease);
+}
+.icon-circle:hover { background: var(--icon-hover); }
+.icon-circle svg { width: 18px; height: 18px; }
+
+/* Story ------------------------------------------------------------------ */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  position: relative;
+}
+.split > div { padding: 32px 0; }
+/* Divisor vertical entre las dos columnas, igual que en el footer y en la
+   grilla de servicios. Cae en el centro del contenedor, así que se alinea
+   con el del footer que viene justo debajo. */
+.split::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: var(--line);
+}
+
+.split .eyebrow { margin-bottom: 24px; }
+/* :not(.eyebrow) para que esta regla no pise el tamaño de los rótulos en
+   cursiva, que deben medir 20px como los del footer. */
+/* Sin tope de ancho: el párrafo ocupa toda su columna (568px). El aire con el
+   divisor central lo da el canal entre columnas, 32px de gutter con 16 a cada
+   lado. Mismo criterio que en las cajas de servicios. */
+.split p:not(.eyebrow) { margin: 0 0 18px; font-size: 16px; line-height: 26px; }
+
+.polaroid-wrap {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 500px;
+}
+.polaroid-wrap img {
+  position: absolute;
+  width: 300px;
+  border-radius: 3px;
+  box-shadow: 0 24px 48px rgba(0,0,0,.55);
+}
+.polaroid-wrap img:nth-child(1) { transform: rotate(-9deg) translate(-34px, 12px); }
+.polaroid-wrap img:nth-child(2) { transform: rotate(-4deg) translate(-14px, 5px); }
+.polaroid-wrap img:nth-child(3) { transform: rotate(4deg); z-index: 2; }
+
+/* Retrato único, en lugar del trío de polaroids del referente. Una sola foto
+   pide otro tratamiento: recta y con el radio del sitio, no apilada y girada.
+   El aspect-ratio 4/5 fuerza el encuadre vertical sea cual sea la foto que
+   pongas; si recorta algo importante, añade object-position al <img>. */
+.portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+.portrait img {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  box-shadow: 0 24px 48px rgba(0,0,0,.55);
+  /* Mientras no exista img/leandro.jpg, el hueco se ve como un marco vacío
+     y no como una imagen rota. Al poner la foto, este fondo queda tapado. */
+  background: rgba(255,255,255,.06);
+}
+
+/* En la portada el historial va a dos columnas: a 1168px de ancho una sola
+   dejaría un vacío enorme entre el cargo y la fecha. En Story sigue a una. */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+}
+.timeline-row .avatar { width: 40px; height: 40px; flex: none; color: var(--fg); }
+
+/* Sin filete arriba ni abajo: el bloque ya está enmarcado por las guías y por
+   los filetes de sección. Sólo quedan las líneas que separan una fila de otra. */
+.timeline-row {
+  display: flex; align-items: center; gap: 16px;
+  /* 20px -> filas de 82px, el mismo ritmo que el original */
+  padding: 20px 0;
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+.timeline-row:last-child { box-shadow: none; }
+
+/* Historial en Sobre mí. El referente dejaba 6px de respiro vertical, que al
+   lado de las cajas de servicios de la portada quedaba muy apretado: ahora
+   lleva los mismos 32px arriba y abajo que .service.
+   El texto va al ancho completo de su columna, igual que la biografía de
+   arriba; el aire con el divisor lo da el canal de 32px entre columnas. */
+.split--tight > div { padding: 32px 0; }
+/* La columna del historial va exactamente igual que en la portada
+   (.split--history): 12px de entrada arriba y sin recorte por la derecha, para
+   que la línea separadora ocupe los 568px de la columna y la fecha llegue
+   hasta su borde. Si tocas una de las dos, toca la otra. */
+.split--tight > :first-child { padding-top: 12px; }
+
+/* En la portada el historial sí respeta el ritmo de las demás secciones: 32px
+   entre el filete y el contenido, igual que los servicios. La columna de la
+   izquierda resta los 20px de padding interno de la primera fila para que su
+   texto arranque a la misma altura que el rótulo de la derecha. */
+.split--history > :first-child { padding-top: 12px; }
+.timeline-row img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.timeline-row .role { font-size: 16px; line-height: 22px; }
+.timeline-row .company { font-size: 14px; line-height: 20px; color: var(--muted); }
+.timeline-row .date { margin-left: auto; font-size: 14px; color: var(--muted); flex: none; }
+
+.cv-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; margin-top: 24px; padding: 0 20px;
+  background: var(--btn-bg);
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  transition: background .2s var(--ease);
+}
+.cv-btn:hover { background: var(--btn-bg-hover); }
+.cv-btn svg { width: 16px; height: 16px; }
+
+/* Sección final: titular abajo a la izquierda, collage ocupando la derecha.
+   Medido del original: la sección va de 1704 a 2186 (482px de alto). */
+.final { padding-top: 24px; }
+.final-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  align-items: end;
+  min-height: 458px;
+}
+.final-inner h1 { padding-bottom: 8px; }
+/* Banda de cierre sin collage: a una columna y más baja, para que el titular
+   no quede flotando solo en 458px de vacío. El ancho máximo de 320px del
+   titular existía para que cupiera al lado del collage; sin collage sobra
+   sitio, así que se suelta y el texto va en una línea. */
+.final-inner--solo { grid-template-columns: 1fr; min-height: 240px; }
+.final-inner--solo .section-title { max-width: none; }
+
+.collage { position: relative; height: 100%; min-height: 458px; }
+.collage img { position: absolute; }
+.collage .note  { width: 210px; top: 130px; left: 4%;  transform: rotate(-7deg); }
+.collage .cat   { width: 250px; top: 20px;  left: 26%; transform: rotate(3deg); z-index: 2; border-radius: 3px; box-shadow: 0 24px 48px rgba(0,0,0,.55); }
+.collage .hello { width: 185px; top: 95px;  left: 60%; transform: rotate(9deg); }
+
+/* Responsive (breakpoints propios, no medidos del original) --------------- */
+
+@media (max-width: 1000px) {
+  :root { --hero-h: 560px; }
+  h1, h2 { font-size: 44px; line-height: 50px; letter-spacing: -1.2px; }
+  .guides { display: none; }
+  .rule::before, .rule::after { display: none; }
+  .works-grid { grid-template-columns: 1fr; }
+  .work-card, .work-card.half { grid-column: span 1; aspect-ratio: 4/3; }
+  .service-row { grid-template-columns: 1fr; }
+  .service-row::before { display: none; }
+  .service { box-shadow: inset 0 -1px 0 var(--line); }
+  .service:last-child { box-shadow: none; }
+  .section { padding-top: 120px; }
+  .site-footer, .split, .final-inner, .timeline-grid,
+  .case-head, .case-block { grid-template-columns: 1fr; }
+  .case-block { padding: 40px 0; }
+  .case-block > .eyebrow { margin-bottom: 16px; }
+  .case-meta { margin-top: 24px; }
+  .site-footer::before, .split::before { display: none; }
+  .final { padding-top: 72px; }
+  .final-inner { min-height: 0; }
+  .companies { height: auto; flex-wrap: wrap; gap: 16px; padding: 24px 0; }
+  .companies .eyebrow { width: 100%; }
+  .collage { display: none; }
+}
+
+@media (max-width: 600px) {
+  :root { --hero-h: 460px; }
+  h1, h2 { font-size: 32px; line-height: 38px; letter-spacing: -.8px; }
+  .gallery img { height: 240px; }
+  .timeline-row .date { display: none; }
+  /* En móvil el nombre completo y la pastilla no caben juntos (necesitan
+     404px y un iPhone 14 Pro tiene 393): se deja sólo el nombre de pila. */
+  .logo-last { display: none; }
+}
