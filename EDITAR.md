@@ -29,8 +29,8 @@ las imágenes están enlazadas a un servidor ajeno y pueden desaparecer sin avis
 - [ ] Los titulares y textos de las dos páginas
 - [ ] Las 7 imágenes de casos + sus etiquetas
 - [ ] Los 4 iconos de servicios
-- [ ] Las 4 imágenes de la galería
-- [ ] En Story: las 3 polaroids y las 3 del collage
+- [ ] Tu retrato en Sobre mí (`img/leandro.webp`)
+- [ ] La biografía de Sobre mí: hoy es un esqueleto, falta tu historia
 - [x] Los 4 logos del historial (ver *Logos del historial*, más abajo)
 - [ ] El correo del footer — está en dos sitios: el texto visible y el
       `data-email` del botón (que es lo que se copia al pulsarlo)

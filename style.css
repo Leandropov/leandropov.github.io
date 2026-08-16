@@ -376,7 +376,17 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
 }
 
-.logo { font-size: 21px; line-height: 20px; letter-spacing: -.5px; font-weight: 500; }
+/* El texto mide 20px de alto y WCAG 2.2 pide 24 como mínimo para algo que se
+   pulsa. Se gana con relleno vertical, que agranda la zona sensible sin mover
+   nada de sitio: `inline-flex` para que el relleno cuente, y el margen
+   negativo para que el enlace siga alineado con la pastilla de al lado. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 0;
+  margin: -4px 0;
+  font-size: 21px; line-height: 20px; letter-spacing: -.5px; font-weight: 500;
+}
 
 /* Medidas del original: pista de 28px sin padding, y cada enlace ocupa el alto
    completo con padding asimétrico (menos por el lado del icono). */
@@ -535,16 +545,7 @@ h1, h2 {
 
 .case-title { max-width: none; margin-bottom: 32px; }
 
-/* Entradilla a la izquierda, rol a la derecha */
-.case-head {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: var(--col-gap);
-  width: 100%;
-}
 .case-lead { margin: 0; max-width: 520px; font-size: 20px; line-height: 30px; color: var(--muted); }
-.case-meta p:not(.eyebrow) { margin: 0; font-size: 16px; line-height: 26px; }
-.case-meta .eyebrow { margin-bottom: 12px; }
 
 /* Resumen. Medido del original: el bloque ocupa los 1200 del contenedor y se
    parte en 720 + 480 SIN canal — las columnas se tocan y el divisor vertical
@@ -705,7 +706,6 @@ h1, h2 {
 /* Secciones -------------------------------------------------------------- */
 
 .section { padding-top: 216px; }
-.section-head { margin-bottom: 32px; }
 
 /* Servicios -------------------------------------------------------------- */
 
@@ -761,36 +761,6 @@ h1, h2 {
   font-size: 16px;
   line-height: 26px;
   color: var(--muted);
-}
-
-/* Galería horizontal ----------------------------------------------------- */
-
-/* Banda del slider: fondo opaco del ANCHO DEL CONTENEDOR (medido: x264 w1200),
-   no a sangre. En los márgenes la rejilla se sigue viendo. */
-.gallery-band {
-  background: var(--bg);
-  width: calc(100% - var(--pad) * 2);
-  max-width: var(--outer);
-  margin: 0 auto;
-  padding: 0 var(--pad);
-}
-
-.gallery {
-  display: flex;
-  gap: var(--card-gap);
-  padding-top: var(--pad);
-  padding-bottom: var(--pad);
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.gallery::-webkit-scrollbar { display: none; }
-.gallery img {
-  height: 360px;
-  width: auto;
-  flex: none;
-  border-radius: var(--radius-card);
-  scroll-snap-align: start;
 }
 
 /* Footer ----------------------------------------------------------------- */
@@ -878,21 +848,6 @@ h1, h2 {
    lado. Mismo criterio que en las cajas de servicios. */
 .split p:not(.eyebrow) { margin: 0 0 18px; font-size: 16px; line-height: 26px; }
 
-.polaroid-wrap {
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  min-height: 500px;
-}
-.polaroid-wrap img {
-  position: absolute;
-  width: 300px;
-  border-radius: 3px;
-  box-shadow: 0 24px 48px rgba(0,0,0,.55);
-}
-.polaroid-wrap img:nth-child(1) { transform: rotate(-9deg) translate(-34px, 12px); }
-.polaroid-wrap img:nth-child(2) { transform: rotate(-4deg) translate(-14px, 5px); }
-.polaroid-wrap img:nth-child(3) { transform: rotate(4deg); z-index: 2; }
-
 /* Retrato único, en lugar del trío de polaroids del referente. Una sola foto
    pide otro tratamiento: recta y con el radio del sitio, no apilada y girada.
    El aspect-ratio 4/5 fuerza el encuadre vertical sea cual sea la foto que
@@ -915,13 +870,6 @@ h1, h2 {
   background: rgba(255,255,255,.06);
 }
 
-/* En la portada el historial va a dos columnas: a 1168px de ancho una sola
-   dejaría un vacío enorme entre el cargo y la fecha. En Story sigue a una. */
-.timeline-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: var(--col-gap);
-}
 .timeline-row .avatar { width: 40px; height: 40px; flex: none; color: var(--fg); }
 
 /* Sin filete arriba ni abajo: el bloque ya está enmarcado por las guías y por
@@ -1001,12 +949,6 @@ h1, h2 {
 .final-inner--solo { grid-template-columns: 1fr; min-height: 240px; }
 .final-inner--solo .section-title { max-width: none; }
 
-.collage { position: relative; height: 100%; min-height: 458px; }
-.collage img { position: absolute; }
-.collage .note  { width: 210px; top: 130px; left: 4%;  transform: rotate(-7deg); }
-.collage .cat   { width: 250px; top: 20px;  left: 26%; transform: rotate(3deg); z-index: 2; border-radius: 3px; box-shadow: 0 24px 48px rgba(0,0,0,.55); }
-.collage .hello { width: 185px; top: 95px;  left: 60%; transform: rotate(9deg); }
-
 /* Responsive (breakpoints propios, no medidos del original) --------------- */
 
 @media (max-width: 1000px) {
@@ -1021,21 +963,23 @@ h1, h2 {
   .service { box-shadow: inset 0 -1px 0 var(--line); }
   .service:last-child { box-shadow: none; }
   .section { padding-top: 120px; }
-  .site-footer, .split, .final-inner, .timeline-grid,
-  .case-head, .case-block { grid-template-columns: 1fr; }
+  .site-footer, .split, .final-inner, .case-block { grid-template-columns: 1fr; }
   .case-block { padding: 40px 0; }
   .case-block > .eyebrow { margin-bottom: 16px; }
-  .case-meta { margin-top: 24px; }
   .site-footer::before, .split::before { display: none; }
   .final { padding-top: 72px; }
   .final-inner { min-height: 0; }
-  .collage { display: none; }
 }
 
 @media (max-width: 600px) {
   :root { --hero-h: 460px; }
   h1, h2 { font-size: 32px; line-height: 38px; letter-spacing: -.8px; }
-  .gallery img { height: 240px; }
+  /* En móvil las tres etiquetas no caben en una línea y el texto se partía
+     dentro de cada pastilla, que quedaban dobles y apretadas. Ahora cada una
+     se mantiene en una línea y son las pastillas las que bajan de fila: hace
+     falta fijar el borde derecho para que el bloque tenga dónde envolver. */
+  .work-tags { right: var(--pad); flex-wrap: wrap; row-gap: 6px; }
+  .tag { white-space: nowrap; }
   /* Antes la fecha se ocultaba en móvil. En un portfolio, cuánto tiempo
      estuviste en cada sitio es justo lo que va a mirar quien contrata, así que
      en vez de esconderla se baja a su propia línea, alineada con el cargo:

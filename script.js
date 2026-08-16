@@ -18,20 +18,51 @@ requestAnimationFrame(() => {
   if (hero) setTimeout(() => hero.classList.add('is-visible'), 150);
 });
 
-// Copy email to clipboard
+// Copiar el correo al portapapeles
 const copyBtn = document.getElementById('copyEmailBtn');
 if (copyBtn) {
+  const label = copyBtn.querySelector('.email-label');
+
+  const avisar = (texto) => {
+    const original = label.textContent;
+    label.textContent = texto;
+    setTimeout(() => { label.textContent = original; }, 1500);
+  };
+
+  // Reserva para cuando el portapapeles moderno está bloqueado: pasa si la
+  // página no va por https o si el navegador niega el permiso. Es una orden
+  // obsoleta, pero sigue funcionando en todas partes y no pide permiso.
+  const copiarALaAntigua = (texto) => {
+    const campo = document.createElement('textarea');
+    campo.value = texto;
+    campo.setAttribute('readonly', '');
+    campo.style.cssText = 'position:fixed;top:-9999px';
+    document.body.appendChild(campo);
+    campo.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    campo.remove();
+    return ok;
+  };
+
   copyBtn.addEventListener('click', async () => {
     const email = copyBtn.dataset.email;
     try {
       await navigator.clipboard.writeText(email);
-      const label = copyBtn.querySelector('.email-label');
-      const original = label.textContent;
-      label.textContent = 'Copied!';
-      setTimeout(() => { label.textContent = original; }, 1500);
-    } catch (e) {
-      // clipboard API unavailable — no-op
-    }
+      avisar('¡Copiado!');
+      return;
+    } catch (e) { /* seguimos con la reserva */ }
+
+    if (copiarALaAntigua(email)) { avisar('¡Copiado!'); return; }
+
+    // Si tampoco, se deja el correo seleccionado para copiarlo a mano. No se
+    // toca el texto del botón a propósito: cambiarlo borraría la selección.
+    // Antes de esto, un fallo aquí no producía absolutamente nada.
+    const sel = window.getSelection();
+    const rango = document.createRange();
+    rango.selectNodeContents(label);
+    sel.removeAllRanges();
+    sel.addRange(rango);
   });
 }
 
