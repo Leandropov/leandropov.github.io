@@ -1,6 +1,11 @@
 /* ==========================================================================
-   Daniel Sun — clon
-   Medidas tomadas del sitio original a viewport 1920 (computed styles reales):
+   Portfolio de Leandro Bravo — leandrobravo.com
+
+   La estructura visual nació como réplica de danielsun.space y de ahí salen
+   las medidas de abajo, pero el contenido, los casos y las decisiones de
+   diseño posteriores son de Leandro.
+
+   Medidas tomadas del sitio de referencia a viewport 1920 (computed styles):
      contenedor 1200px con 16px de padding  -> contenido 1168px
      rejilla de fondo 25.5px, guías verticales en el borde del contenedor
      hero 700px de alto, contenido anclado abajo (h1 en y=390, botón hasta 684)
