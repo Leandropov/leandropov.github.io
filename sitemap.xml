@@ -2,36 +2,67 @@
 <!-- Lista de las páginas del sitio para los buscadores.
      Si añades una página de caso nueva, añade aquí su <url> y actualiza la
      fecha de <lastmod>. Si algún día pones dominio propio, hay que cambiar el
-     dominio en las seis direcciones. -->
+     dominio en las doce direcciones. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://leandrobravo.com/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://leandrobravo.com/about.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leandrobravo.com/enovus.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://leandrobravo.com/abastible.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://leandrobravo.com/eclass.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://leandrobravo.com/payscan.html</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <!-- Versión en inglés: las mismas seis páginas dentro de /en/ -->
+  <url>
+    <loc>https://leandrobravo.com/en/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://leandrobravo.com/en/about.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leandrobravo.com/en/enovus.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandrobravo.com/en/abastible.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandrobravo.com/en/eclass.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://leandrobravo.com/en/payscan.html</loc>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>

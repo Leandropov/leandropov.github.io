@@ -392,6 +392,28 @@ a { color: inherit; text-decoration: none; }
   margin: -4px 0;
   font-size: 21px; line-height: 20px; letter-spacing: -.5px; font-weight: 500;
 }
+/* El espacio entre nombre y apellido va dentro del span, y al ser .logo un
+   contenedor flex se colapsaba: se leía "LeandroBravo". */
+.logo-last { white-space: pre; }
+
+/* Selector de idioma: un solo enlace "ES / EN" que lleva a la misma página en
+   el otro idioma. El idioma actual va en el color del texto y el otro apagado,
+   igual que la pestaña activa de la pastilla. `margin-left: auto` lo pega a la
+   pastilla: sin él, el `space-between` del header lo dejaría flotando en el
+   centro. El relleno vertical es por lo mismo que en el logo: llegar a 24px. */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: -4px 12px -4px auto;
+  padding: 4px;
+  font-size: 13px; line-height: 20px; letter-spacing: .2px; font-weight: 500;
+  color: var(--nav-idle);
+  transition: color .25s var(--ease);
+}
+.lang-switch .lang-on { color: var(--fg); }
+.lang-switch .lang-sep { opacity: .5; }
+.lang-switch:hover { color: var(--fg); }
 
 /* Medidas del original: pista de 28px sin padding, y cada enlace ocupa el alto
    completo con padding asimétrico (menos por el lado del icono). */
@@ -482,6 +504,12 @@ h1, h2 {
 .section-title { max-width: 840px; }
 .section-title--sm { max-width: 500px; }
 .section-title--xs { max-width: 320px; }
+
+/* Versión en inglés (/en/): mismas clases, otro texto. Los demás titulares
+   cortan bien con las medidas de arriba; el de About dejaba "documented."
+   sola en una cuarta línea. Vale la misma advertencia: si cambias un titular
+   en inglés, revisa cómo corta y añade aquí su medida si hace falta. */
+html[lang="en"] .hero h1.story { max-width: 1000px; }
 
 .eyebrow {
   font-family: var(--garamond);
@@ -1019,4 +1047,8 @@ h1, h2 {
   /* En móvil el nombre completo y la pastilla no caben juntos (necesitan
      404px y un iPhone 14 Pro tiene 393): se deja sólo el nombre de pila. */
   .logo-last { display: none; }
+  /* Y del selector de idioma sólo queda el destino ("EN" o "ES"): con los dos
+     no cabe junto a la pastilla en un teléfono estrecho. */
+  .lang-switch .lang-on, .lang-switch .lang-sep { display: none; }
+  .lang-switch { margin-right: 8px; }
 }

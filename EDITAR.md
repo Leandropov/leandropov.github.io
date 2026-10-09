@@ -1,6 +1,7 @@
 # Cómo editar este sitio
 
-Todo el contenido vive en dos archivos: `index.html` (Works) y `about.html` (Story).
+Todo el contenido vive en dos archivos: `index.html` (Works) y `about.html` (Story),
+más sus gemelos en inglés dentro de `en/` (ver *La versión en inglés*).
 Son texto plano: buscas la frase, la cambias, guardas y recargas el navegador.
 No hay que compilar nada.
 
@@ -168,6 +169,36 @@ logos en grande, tira de `logos-originales/`: ahí Abastible conserva la palabra
 El filete gris del borde es lo que hace que los logos sobre blanco se lean como
 fichas en la página clara. Está en `style.css`, en `.timeline-row img`: para
 quitarlo, borra la línea del `border`.
+
+## La versión en inglés
+
+El sitio está dos veces: en español en la raíz y en inglés dentro de `en/`.
+Cada página tiene su gemela con el mismo nombre (`enovus.html` ↔
+`en/enovus.html`). No hay nada automático entre ellas: **si cambias un texto,
+una fecha, una imagen o un caso en una, hazlo también en la otra.**
+
+Lo que comparten y no hay que duplicar: `style.css`, `script.js`, las
+imágenes, las fuentes y los logos. Las páginas de `en/` los cargan con `../`
+delante (`../img/…`, `../style.css`).
+
+- **El selector ES / EN** del header es un enlace normal a la página gemela.
+  Al crear una página nueva, copia el bloque `lang-switch` de otra y cambia
+  el nombre del archivo en el `href`.
+- **Las tres líneas `hreflang`** del `<head>` le dicen a Google que las dos
+  páginas son la misma en dos idiomas. Tienen que estar en las dos, con las
+  mismas direcciones. En una página nueva, cambia el nombre del archivo.
+- **Los titulares en inglés** cortan distinto que en español. Si cambias uno
+  y queda una palabra sola en la última línea, su medida se ajusta en
+  `style.css`, en el bloque `html[lang="en"]`.
+- **El CV en inglés**: los botones "Download my CV" de `en/index.html` y
+  `en/about.html` apuntan hoy al PDF en español. Cuando tengas el inglés,
+  guárdalo como `cv-leandro-bravo-en.pdf` y cambia el `href` en esas dos
+  páginas.
+- **La tarjeta al compartir** en inglés es `img/og-card-en.png`.
+- **Un caso nuevo** son dos archivos (uno en cada idioma), dos tarjetas (en
+  `index.html` y en `en/index.html`) y dos direcciones en `sitemap.xml`.
+
+---
 
 ## Cambiar colores y tipografía
 

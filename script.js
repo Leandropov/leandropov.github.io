@@ -22,6 +22,8 @@ requestAnimationFrame(() => {
 const copyBtn = document.getElementById('copyEmailBtn');
 if (copyBtn) {
   const label = copyBtn.querySelector('.email-label');
+  // El aviso sale en el idioma de la página: las de /en/ llevan lang="en".
+  const copiado = document.documentElement.lang === 'en' ? 'Copied!' : '¡Copiado!';
 
   const avisar = (texto) => {
     const original = label.textContent;
@@ -49,11 +51,11 @@ if (copyBtn) {
     const email = copyBtn.dataset.email;
     try {
       await navigator.clipboard.writeText(email);
-      avisar('¡Copiado!');
+      avisar(copiado);
       return;
     } catch (e) { /* seguimos con la reserva */ }
 
-    if (copiarALaAntigua(email)) { avisar('¡Copiado!'); return; }
+    if (copiarALaAntigua(email)) { avisar(copiado); return; }
 
     // Si tampoco, se deja el correo seleccionado para copiarlo a mano. No se
     // toca el texto del botón a propósito: cambiarlo borraría la selección.
