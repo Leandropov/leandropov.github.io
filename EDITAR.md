@@ -190,10 +190,10 @@ delante (`../img/…`, `../style.css`).
 - **Los titulares en inglés** cortan distinto que en español. Si cambias uno
   y queda una palabra sola en la última línea, su medida se ajusta en
   `style.css`, en el bloque `html[lang="en"]`.
-- **El CV en inglés**: los botones "Download my CV" de `en/index.html` y
-  `en/about.html` apuntan hoy al PDF en español. Cuando tengas el inglés,
-  guárdalo como `cv-leandro-bravo-en.pdf` y cambia el `href` en esas dos
-  páginas.
+- **Los CV**: `cv-leandro-bravo.pdf` (español, lo usan `index.html` y
+  `about.html`) y `cv-leandro-bravo-en.pdf` (inglés, lo usan `en/index.html`
+  y `en/about.html`). No se editan aquí: se generan en `~/cv-leandro-bravo`
+  con `./build.sh` y se copian encima de estos dos archivos.
 - **La tarjeta al compartir** en inglés es `img/og-card-en.png`.
 - **Un caso nuevo** son dos archivos (uno en cada idioma), dos tarjetas (en
   `index.html` y en `en/index.html`) y dos direcciones en `sitemap.xml`.
